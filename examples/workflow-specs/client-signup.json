@@ -1,0 +1,35 @@
+{
+  "name": "new-client-onboarding",
+  "version": 1,
+  "trigger": {
+    "type": "webhook",
+    "event": "client.created"
+  },
+  "steps": [
+    {
+      "id": "create_crm_contact",
+      "type": "crm.create_contact",
+      "input": {
+        "email": "{{trigger.payload.email}}",
+        "first_name": "{{trigger.payload.first_name}}",
+        "last_name": "{{trigger.payload.last_name}}"
+      },
+      "retry": {
+        "max_attempts": 3,
+        "backoff_seconds": 10
+      }
+    },
+    {
+      "id": "send_welcome_email",
+      "type": "email.send",
+      "depends_on": ["create_crm_contact"],
+      "input": {
+        "to": "{{trigger.payload.email}}",
+        "template_id": "welcome_v1",
+        "variables": {
+          "first_name": "{{trigger.payload.first_name}}"
+        }
+      }
+    }
+  ]
+}

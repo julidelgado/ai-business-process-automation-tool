@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Env and secrets
+.env
+.env.*
+!.env.example
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and runtime
+*.log
+coverage/
+htmlcov/
+
+# Local data
+*.sqlite
+*.db
