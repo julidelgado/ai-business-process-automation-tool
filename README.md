@@ -1,4 +1,5 @@
 # Project 2 - AI Business Process Automation Tool
+AI-powered workflow automation platform that converts natural-language business instructions into executable, versioned workflows.
 
 ## Goal
 Build a free, self-hostable platform that converts natural language business instructions into reliable automated workflows.
@@ -53,3 +54,6 @@ The system parses intent, generates a validated workflow definition, and execute
 - [Testing strategy](docs/07-testing-strategy.md)
 - [Build checklist](docs/08-build-checklist.md)
 - [Phase completion report](docs/09-phase-completion.md)
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
