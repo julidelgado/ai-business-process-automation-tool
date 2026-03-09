@@ -18,20 +18,19 @@ def resolve_path(context: dict[str, Any], path: str) -> Any:
 
 def render_value(value: Any, context: dict[str, Any]) -> Any:
     if isinstance(value, str):
-        matches = TOKEN_RE.findall(value)
-        if not matches:
+        if not TOKEN_RE.search(value):
             return value
 
-        if len(matches) == 1 and value.strip() == f"{{{{{matches[0]}}}}}":
-            resolved = resolve_path(context, matches[0].strip())
+        exact_token = TOKEN_RE.fullmatch(value.strip())
+        if exact_token:
+            resolved = resolve_path(context, exact_token.group(1).strip())
             return value if resolved is None else resolved
 
-        rendered = value
-        for token in matches:
-            resolved = resolve_path(context, token.strip())
-            replacement = "" if resolved is None else str(resolved)
-            rendered = rendered.replace(f"{{{{{token}}}}}", replacement)
-        return rendered
+        def _replace_token(match: re.Match[str]) -> str:
+            resolved = resolve_path(context, match.group(1).strip())
+            return "" if resolved is None else str(resolved)
+
+        return TOKEN_RE.sub(_replace_token, value)
 
     if isinstance(value, list):
         return [render_value(item, context) for item in value]
