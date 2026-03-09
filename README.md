@@ -1,4 +1,4 @@
-# Project 2 - AI Business Process Automation Tool
+# AI Business Process Automation Tool
 AI-powered workflow automation platform that converts natural-language business instructions into executable, versioned workflows.
 
 ## Goal
